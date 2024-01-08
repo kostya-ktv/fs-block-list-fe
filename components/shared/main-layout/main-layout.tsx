@@ -10,12 +10,12 @@ export const MainLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
     overflow-y-auto
     flex
     flex-col
-    gap-y-1
+    gap-y-3
     p-4
     "
     >
       <MainHeader />
-      <div className="relative flex flex-col p-4 h-full">{children}</div>
+      <div className="relative flex flex-col h-full">{children}</div>
     </main>
   );
 };

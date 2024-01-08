@@ -156,7 +156,7 @@ export const blockListControllerCreateBlockListItem = (
   blockListItemCreateDTO: BodyType<BlockListItemCreateDTO>,
   options?: SecondParameter<typeof createInstance>,
 ) => {
-  return createInstance<BlockListDTO>(
+  return createInstance<BlockListItemDTO>(
     {
       url: `/block-list`,
       method: "POST",

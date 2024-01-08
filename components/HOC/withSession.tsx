@@ -1,4 +1,5 @@
 "use client";
+import { Spinner } from "@/components/ui";
 import { useSession } from "@/hooks";
 import { ROUTES } from "@/lib/routes";
 import { redirect } from "next/navigation";
@@ -11,7 +12,7 @@ export const withSession = <P extends WithAuthProps>(
   return (props) => {
     const { isError, isLoading } = useSession();
     if (isLoading) {
-      return;
+      return <Spinner />;
     }
     if (isError) {
       redirect(ROUTES.signIn);

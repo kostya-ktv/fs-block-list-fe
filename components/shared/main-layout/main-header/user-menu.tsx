@@ -1,5 +1,4 @@
 "use client";
-import { AccountSubMenu } from "@/components/shared/main-layout/main-header/account-sub-menu";
 import {
   MenubarContent,
   MenubarItem,
@@ -7,7 +6,6 @@ import {
   MenubarSeparator,
   MenubarTrigger,
 } from "@/components/ui/menubar";
-import { useSession } from "@/hooks";
 import { authControllerSignOut } from "@/lib/api/generated";
 import { ROUTES } from "@/lib/routes";
 import { QueryKeys } from "@/providers/query.provider";
@@ -16,10 +14,8 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 
 export const UserMenuBar = () => {
-  const { isError } = useSession();
   const queryClient = useQueryClient();
   const router = useRouter();
-
   const handleLogout = async () => {
     await authControllerSignOut().then(async () => {
       await queryClient.invalidateQueries({
@@ -31,21 +27,15 @@ export const UserMenuBar = () => {
     <MenubarMenu>
       <MenubarTrigger className="flex gap-x-2 items-center">
         <AvatarIcon />
-        <p>User</p>
+        <span>User</span>
       </MenubarTrigger>
       <MenubarContent>
-        <MenubarItem
-          disabled={isError}
-          onClick={() => router.push(ROUTES.sessionInfo)}
-        >
+        <MenubarItem onClick={() => router.push(ROUTES.sessionInfo)}>
           Session
         </MenubarItem>
 
-        <AccountSubMenu disabled={isError} />
         <MenubarSeparator />
-        <MenubarItem disabled={isError} onClick={() => handleLogout()}>
-          Logout
-        </MenubarItem>
+        <MenubarItem onClick={() => handleLogout()}>Logout</MenubarItem>
       </MenubarContent>
     </MenubarMenu>
   );

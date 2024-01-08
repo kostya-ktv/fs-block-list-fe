@@ -5,6 +5,7 @@ export const queryClient = new QueryClient();
 export enum QueryKeys {
   session = "session",
   account = "account",
+  blockList = "blockList",
 }
 const QueryProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
