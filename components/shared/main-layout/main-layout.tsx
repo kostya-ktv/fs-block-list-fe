@@ -1,8 +1,8 @@
-import { MainHeader } from "@/components/shared/main-layout/main-header";
+import { MainHeader } from "@/components/shared/main-layout/main-header/main-header";
 
 export const MainLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
-    <div
+    <main
       className="
     w-screen
     h-screen
@@ -10,12 +10,12 @@ export const MainLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
     overflow-y-auto
     flex
     flex-col
-    gap-y-4
-    p-5
+    gap-y-1
+    p-4
     "
     >
       <MainHeader />
-      <main className="relative flex flex-col">{children}</main>
-    </div>
+      <div className="relative flex flex-col p-4 h-full">{children}</div>
+    </main>
   );
 };

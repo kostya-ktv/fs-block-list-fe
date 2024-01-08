@@ -1,25 +1,14 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui";
 
 export function HomePage() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Block list</CardTitle>
-        <CardDescription>NextJS App</CardDescription>
+        <CardTitle>Block list application</CardTitle>
+        <CardDescription>
+          #NextJS #ReactQuery #NestJS #Prisma #Orval #Postgres #Docker
+        </CardDescription>
       </CardHeader>
-      <CardContent>
-        <p>Card Content</p>
-      </CardContent>
-      <CardFooter>
-        <p>Card Footer</p>
-      </CardFooter>
     </Card>
   );
 }

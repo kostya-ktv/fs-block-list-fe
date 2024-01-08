@@ -13,7 +13,7 @@ import {
   CardContent,
   CardFooter,
 } from "@/components/ui";
-import { authControllerSignUp } from "@/lib/api/generated";
+import { authControllerSignIn } from "@/lib/api/generated";
 import { ROUTES } from "@/lib/routes";
 import { QueryKeys } from "@/providers/query.provider";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -30,11 +30,11 @@ const formSchema = z.object({
   }),
 });
 
-export const SignUpForm = () => {
+export const SignInForm = () => {
   const router = useRouter();
-  const [error, setError] = useState("");
 
   const queryClient = useQueryClient();
+  const [error, setError] = useState("");
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -42,26 +42,23 @@ export const SignUpForm = () => {
       password: "",
     },
   });
-  const signUpMutation = useMutation({
-    mutationFn: authControllerSignUp,
-    onSuccess: async () => {
+  const signInMutation = useMutation({
+    mutationFn: authControllerSignIn,
+    onSuccess: async (data) => {
       await queryClient.invalidateQueries({ queryKey: [QueryKeys.session] });
       router.push(ROUTES.sessionInfo);
     },
-    onError: (error: any) => {
-      let msg = error?.response?.data?.type || "Sign up server error";
-      setError(msg);
-    },
+    onError: (error) => setError(error.message),
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     setError("");
-    signUpMutation.mutate(values);
+    signInMutation.mutate(values);
   }
 
   return (
     <Card className="w-[80vw] max-w-[500px]">
-      <CardHeader>Register form</CardHeader>
+      <CardHeader>Sign in</CardHeader>
 
       <CardContent>
         <Form {...form}>
@@ -108,16 +105,14 @@ export const SignUpForm = () => {
               className="w-full"
               type="submit"
             >
-              Sign Up
+              Login
             </Button>
           </form>
         </Form>
       </CardContent>
       {error && (
         <CardFooter>
-          <div className="w-full p-3 bg-red-50 border border-red-500 text-center text-red-500">
-            {error}
-          </div>
+          <div className="w-full py-3 bg-red-50 text-red-500">{error}</div>
         </CardFooter>
       )}
     </Card>
