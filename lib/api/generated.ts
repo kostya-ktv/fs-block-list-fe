@@ -6,13 +6,17 @@
  */
 import { createInstance } from "./api-instance";
 import type { BodyType } from "./api-instance";
+export enum BlockItemType {
+  Website = "Website",
+  KeyWord = "KeyWord",
+}
 export type BlockListControllerGetBlockListParams = {
   q?: string;
 };
 
 export interface BlockListItemCreateDTO {
   data: string;
-  type: unknown[];
+  type: BlockItemType;
 }
 
 export interface BlockListItemDTO {
@@ -20,7 +24,7 @@ export interface BlockListItemDTO {
   createdAt: string;
   data: string;
   id: number;
-  type: unknown[];
+  type: BlockItemType;
 }
 
 export interface BlockListDTO {

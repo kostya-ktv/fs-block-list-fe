@@ -4,13 +4,16 @@ import {
   blockListControllerGetBlockList,
   blockListControllerRemoveBlockListItem,
 } from "@/lib/api/generated";
-import { QueryKeys } from "@/providers/query.provider";
+import { QueryKeyGeneric, QueryKeys } from "@/providers/query.provider";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-export const useBlockList = () => {
+export const useBlockList = (searchValue?: string) => {
+  let key = QueryKeyGeneric("blockList", searchValue);
+
   return useQuery({
-    queryKey: [QueryKeys.blockList],
-    queryFn: async () => await blockListControllerGetBlockList(),
+    queryKey: [key],
+    queryFn: async () =>
+      await blockListControllerGetBlockList({ q: searchValue }),
   });
 };
 
@@ -19,17 +22,22 @@ export const useDeleteBlocklistItem = () => {
 
   const mutation = useMutation({
     mutationFn: blockListControllerRemoveBlockListItem,
-    onSuccess: (_, variables) => {
+    onSuccess: async (_, variables) => {
+      const itemID = variables?.params?.id;
       queryClient.setQueryData([QueryKeys.blockList], (prev: BlockListDTO) => {
         const res = { ...prev };
-        res.items = prev.items.filter((el) => el.id !== variables?.params?.id);
+        res.items = prev.items.filter((el) => el.id !== itemID);
         return res;
       });
+      if (itemID) {
+        let key = QueryKeyGeneric("blockList", itemID);
+        await queryClient.invalidateQueries({ queryKey: [key] });
+      }
     },
   });
 
-  return (itemId: number) => {
-    mutation.mutate({ params: { id: itemId } });
+  return async (itemId: number) => {
+    await mutation.mutateAsync({ params: { id: itemId } });
   };
 };
 export const useAddBlocklistItem = () => {
@@ -45,6 +53,5 @@ export const useAddBlocklistItem = () => {
       });
     },
   });
-
-  return mutation.mutate;
+  return { mutation };
 };

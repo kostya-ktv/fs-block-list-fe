@@ -11,14 +11,11 @@ export default function SessionInfoPage() {
       <CardHeader>
         <CardTitle>Session info</CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex flex-col">
+        <span> Status: {status}</span>
         <span>
-          {" "}
-          Status: {status}
-          <span>
-            Account blocking:
-            {sessionData?.isBlockingEnabled ? " enabled" : " disabled"}
-          </span>
+          Account blocking:
+          {sessionData?.isBlockingEnabled ? " enabled" : " disabled"}
         </span>
         {Object.entries(data || {}).map((entry, i) => {
           const key = entry[0].toUpperCase();

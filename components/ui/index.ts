@@ -6,3 +6,4 @@ export * from "./select";
 export * from "./skeleton";
 export * from "./spinner";
 export * from "./form";
+export * from "./textarea";

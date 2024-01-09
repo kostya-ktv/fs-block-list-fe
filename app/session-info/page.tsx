@@ -1,3 +1,4 @@
+"use client";
 import { withSession } from "@/components/HOC";
 import { SessionInfoPage } from "@/components/pages";
 
