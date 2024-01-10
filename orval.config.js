@@ -1,12 +1,12 @@
 module.exports = {
     "main": {
-        input: './shared/api/schema.yaml',
+        input: './lib/api/schema.yaml',
         output: {
-            target: './shared/api/generated.ts',
+            target: './lib/api/generated.ts',
             prettier: true,
             override: {
                 mutator: {
-                    path: './shared/api/api-instance.ts',
+                    path: './lib/api/api-instance.ts',
                     name: 'createInstance'
                 }
             }

@@ -11,18 +11,24 @@ export const BlockList = () => {
   const { data, isLoading, refetch } = useBlockList(debouncedValue);
 
   return (
-    <div className="flex flex-col gap-y-3 max-w-[500px]">
-      <h2>ID: {data?.id}</h2>
-      <AddBlockItem />
-      <Input
-        value={searchValue}
-        onChange={(e) => setSearchValue(e.target.value)}
-        placeholder="Search..."
-      />
-      {isLoading && <Skeleton className="w-full rounded-full h-10" />}
-      {data?.items.map((item) => (
-        <BlockListItem onDelete={refetch} key={item.id} item={item} />
-      ))}
+    <div className="flex flex-wrap">
+      <div className="flex flex-col basis-[400px]">
+        <h2>ID: {data?.id}</h2>
+        <AddBlockItem />
+      </div>
+      <div className="flex flex-col flex-1 gap-y-3">
+        <span>Total found: {data?.items.length}</span>
+        <Input
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
+          placeholder="Search..."
+        />
+        {isLoading && <Skeleton className="w-full rounded-full h-10" />}
+
+        {data?.items.map((item) => (
+          <BlockListItem onDelete={refetch} key={item.id} item={item} />
+        ))}
+      </div>
     </div>
   );
 };

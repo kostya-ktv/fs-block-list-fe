@@ -27,7 +27,7 @@ export const AccountSubMenu: React.FC<{ disabled?: boolean }> = ({
     <MenubarItem disabled>Account</MenubarItem>
   ) : (
     <MenubarSub>
-      <MenubarSubTrigger>Account Blocking</MenubarSubTrigger>
+      <MenubarSubTrigger>Firewall</MenubarSubTrigger>
       <MenubarSubContent>
         <MenubarRadioGroup value={data?.isBlockingEnabled ? "on" : "off"}>
           <MenubarRadioItem

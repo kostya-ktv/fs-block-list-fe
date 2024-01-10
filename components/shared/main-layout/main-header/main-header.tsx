@@ -15,7 +15,7 @@ import { useRouter } from "next/navigation";
 
 export const MainHeader = () => {
   const router = useRouter();
-  const { isError } = useSession();
+  const { data } = useSession();
   return (
     <header className="flex justify-between items-center">
       <Menubar>
@@ -39,7 +39,7 @@ export const MainHeader = () => {
           </MenubarContent>
         </MenubarMenu>
 
-        {!isError && (
+        {data && (
           <>
             <UserMenuBar />
             <BlockingMenuBar />

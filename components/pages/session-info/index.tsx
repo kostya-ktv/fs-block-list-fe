@@ -14,7 +14,7 @@ export default function SessionInfoPage() {
       <CardContent className="flex flex-col">
         <span> Status: {status}</span>
         <span>
-          Account blocking:
+          Firewall:
           {sessionData?.isBlockingEnabled ? " enabled" : " disabled"}
         </span>
         {Object.entries(data || {}).map((entry, i) => {
