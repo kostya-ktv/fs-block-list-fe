@@ -84,7 +84,7 @@ export const AddBlockItem = () => {
           name="data"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Provide additional data</FormLabel>
+              <FormLabel>Provide URL or Keyword</FormLabel>
               <Textarea
                 {...field}
                 placeholder="Data"
@@ -97,7 +97,7 @@ export const AddBlockItem = () => {
         />
         <div className="flex gap-x-3">
           <Button disabled={isLoading} type="submit">
-            Add new item
+            Add to block list
           </Button>
           {isLoading && <Spinner />}
         </div>
